@@ -81,14 +81,6 @@ export function Header({
             <Button
               variant="ghost"
               size="sm"
-              onClick={onToggleSidebar}
-              className="lg:hidden"
-            >
-              <Menu className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
               onClick={() => window.location.href = '/auth'}
               className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50"
             >

@@ -195,8 +195,8 @@ export default function HomePage() {
         <div className="w-full flex gap-6 h-full px-4 py-4">
           {/* Sidebar */}
           <aside
-            className={`transition-all duration-300 flex-shrink-0 ${
-              sidebarCollapsed ? "hidden lg:block w-64" : "w-80"
+            className={`transition-all duration-300 flex-shrink-0  ${
+              sidebarCollapsed ? "hidden lg:block w-64" : "hidden w-80"
             }`}
           >
             <div className="h-full overflow-y-auto">
