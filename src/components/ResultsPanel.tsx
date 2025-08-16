@@ -107,7 +107,7 @@ export function ResultsPanel({ data, onSort, sortField, sortDirection, loading =
                 >
                   <span className="flex items-center">
                     <Building2 className="h-4 w-4 mr-2 text-muted-foreground" />
-                    Entity Name
+                    Company Name
                     {getSortIcon('entity_name')}
                   </span>
                 </Button>
@@ -169,7 +169,7 @@ export function ResultsPanel({ data, onSort, sortField, sortDirection, loading =
                   className="group h-auto p-2 hover:bg-background/50 rounded-md transition-all duration-200 hover:shadow-sm"
                 >
                   <span className="flex items-center">
-                    Entity Type
+                    Company Type
                     {getSortIcon('entity_type')}
                   </span>
                 </Button>

@@ -164,7 +164,7 @@ export function FilterSidebar({ filters, onFilterChange, filterOptions }: Filter
 
         {/* Entity Type Filter */}
         <div>
-          <Label className="text-sm mb-2 block">Entity Type</Label>
+          <Label className="text-sm mb-2 block">Company Type</Label>
           <div className="space-y-1 max-h-24 overflow-y-auto">
             {filterOptions.entityTypes.map(type => (
               <div key={type} className="flex items-center space-x-2">

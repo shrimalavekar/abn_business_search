@@ -53,9 +53,9 @@ export function Header({
                 <p className="text-xs text-muted-foreground">Australian Business Directory</p>
               </div>
             </div>
-            <Badge variant="secondary" className="hidden sm:inline-flex">
+            {/* <Badge variant="secondary" className="hidden sm:inline-flex">
               v2.0
-            </Badge>
+            </Badge> */}
           </div>
 
           {/* Action buttons */}
@@ -100,10 +100,10 @@ export function Header({
                   onChange={onSearchChange}
                 />
               </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              {/* <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span>Live Search</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -15,6 +15,7 @@ import { useCompanies } from "@/hooks/useCompanies";
 import { useFilterOptions } from "@/hooks/useFilterOptions";
 import { useCompanyStats } from "@/hooks/useCompanyStats";
 import { CompanyResponse } from "@/app/api/companies/getCompany";
+import { useDebounce } from "@/utils/debouns";
 
 interface PaginationParams {
   page: number;
@@ -39,6 +40,9 @@ export default function HomePage() {
     sortDirection: "asc",
   });
 
+  const [search, setSearch] = useState("");
+
+
   const buildQuery = useCallback(() => {
     const params = new URLSearchParams();
 
@@ -47,7 +51,7 @@ export default function HomePage() {
     params.set("sortField", String(pagination.sortField));
     params.set("sortDirection", pagination.sortDirection);
 
-    if (filters.search) params.set("search", filters.search);
+    if (search) params.set("search", search);
     if (filters.states?.length)
       filters.states.forEach((s) => params.append("states", s));
     if (filters.postcode) params.set("postcode", filters.postcode);
@@ -64,7 +68,7 @@ export default function HomePage() {
       params.set("recordUpdatedEnd", filters.recordUpdatedEnd);
 
     return params.toString();
-  }, [filters, pagination]);
+  }, [filters, pagination,search]);
 
   // Fetch whenever filters/pagination change (including initial mount)
   useEffect(() => {
@@ -153,6 +157,10 @@ export default function HomePage() {
     setPagination((prev) => ({ ...prev, page }));
   }
 
+  const debouncedSearch = useDebounce( (search: string) => {
+    setSearch(search);
+  }, 700);
+
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 overflow-hidden">
       {/* Header */}
@@ -160,8 +168,7 @@ export default function HomePage() {
         searchValue={filters.search || ""}
         onSearchChange={(search) => {
           console.log("onSearchChange", search);
-          // setFilters(prev => ({ ...prev, search }));
-          // setPagination(prev => ({ ...prev, page: 1 })); // reset page when filters change
+          debouncedSearch(search);
         }}
         showAdvanced={showAdvanced}
         onToggleAdvanced={() => setShowAdvanced(!showAdvanced)}
