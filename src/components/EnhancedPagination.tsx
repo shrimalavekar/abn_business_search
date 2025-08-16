@@ -39,6 +39,16 @@ export function EnhancedPagination({
     return pages;
   };
 
+  const getButtonWidth = (pageNumber: number) => {
+    const digits = pageNumber.toString().length;
+    // Base width for single digit, add extra width for each additional digit
+    if (digits === 1) return 'w-8';
+    if (digits === 2) return 'w-10';
+    if (digits === 3) return 'w-12';
+    if (digits === 4) return 'w-14';
+    return 'w-16'; // For 5+ digits
+  };
+
   if (totalPages <= 1) return null;
 
   return (
@@ -102,7 +112,7 @@ export function EnhancedPagination({
               variant={page === currentPage ? "default" : "outline"}
               size="sm"
               onClick={() => onPageChange(page)}
-              className={`w-8 h-8 p-0 ${
+              className={`${getButtonWidth(page)} h-8 p-0 ${
                 page === currentPage 
                   ? 'bg-primary text-primary-foreground shadow-md' 
                   : 'hover:bg-muted'

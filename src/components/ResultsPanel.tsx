@@ -99,7 +99,7 @@ export function ResultsPanel({ data, onSort, sortField, sortDirection, loading =
                   </span>
                 </Button>
               </TableHead>
-              <TableHead className="w-80 font-semibold">
+              <TableHead className="max-w-[400px] font-semibold">
                 <Button
                   variant="ghost"
                   onClick={() => onSort('entity_name')}
@@ -203,12 +203,12 @@ export function ResultsPanel({ data, onSort, sortField, sortDirection, loading =
                     {item.abn}
                   </div>
                 </TableCell>
-                <TableCell className="py-4">
+                <TableCell className="py-4 max-w-[400px]">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-8 h-8 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       <Building2 className="h-4 w-4 text-primary" />
                     </div>
-                    <span className="group-hover:text-primary transition-colors duration-300">
+                    <span className="group-hover:text-primary transition-colors duration-300 truncate">
                       {item.entity_name}
                     </span>
                   </div>

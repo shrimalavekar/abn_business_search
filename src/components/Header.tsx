@@ -3,6 +3,9 @@ import { Badge } from './ui/badge';
 import { SearchBar } from './SearchBar';
 import { Settings, Database, Menu, Sun, Moon, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '../../supabaseClient';
+import toast from 'react-hot-toast';
 
 interface HeaderProps {
   searchValue: string;
@@ -19,6 +22,7 @@ export function Header({
   onToggleAdvanced, 
   onToggleSidebar 
 }: HeaderProps) {
+  const router = useRouter();
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -34,6 +38,34 @@ export function Header({
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Sign out from Supabase
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        throw error;
+      }
+
+      // Clear any local storage items
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // Clear any cookies (optional - Supabase handles session cookies)
+      document.cookie.split(";").forEach(function(c) { 
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+      });
+
+      toast.success('Logged out successfully');
+      
+      // Redirect to auth page using router.replace to prevent back button issues
+      router.replace('/auth');
+    } catch (error: any) {
+      console.error('Logout error:', error);
+      toast.error('Logout failed. Please try again.');
     }
   };
 
@@ -81,7 +113,7 @@ export function Header({
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => window.location.href = '/auth'}
+              onClick={handleLogout}
               className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50"
             >
               <LogOut className="h-4 w-4" />
