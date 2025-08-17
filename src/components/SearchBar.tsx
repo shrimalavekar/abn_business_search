@@ -19,11 +19,6 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
     return () => clearTimeout(timeout);
   }, [localValue, onChange]);
 
-  // Sync with external value changes
-  // useEffect(() => {
-  
-  //   setLocalValue(value);
-  // }, [value]);
 
   return (
     <div className="relative w-full max-w-2xl">
